@@ -1,21 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   support_bonus.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vivaccar <vivaccar@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 16:20:16 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/07 13:05:01 by vivaccar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cube_bonus.h"
 
-/**
- * @brief Function constructed mainly for debug.
- * Print some values on STDIN_FILENO.
- */
 void	print_map_values(t_gm *game)
 {
 	printf("\n" BLUE "========= MAP INFORMATION =========" RESET "\n");
@@ -44,11 +28,6 @@ void	print_map_values(t_gm *game)
 	printf("\n" BLUE "===================================" RESET "\n");
 }
 
-/**
- * @brief Move a characther if is a space
- * If have int backwards, decrement j value.
- * If dont, acrecent.
-*/
 bool	jump_spaces(char ch, int *j, int backwards)
 {
 	if (ch == ' ' && !backwards)
@@ -63,11 +42,6 @@ bool	jump_spaces(char ch, int *j, int backwards)
 	}
 	return (false);
 }
-
-/**
- * @brief Check some file has a specific extention and if its an openble file
- * if NULL is passed on extention, just check if its an openble file
-*/
 bool	is_openble_file(char *path, char *extention, int ext_len)
 {
 	int		len;

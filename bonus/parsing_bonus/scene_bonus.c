@@ -1,21 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 19:36:02 by aconceic          #+#    #+#             */
-/*   Updated: 2024/09/30 14:30:34 by aconceic         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cube_bonus.h"
 
-/**
- * @brief Starts the parsing of the map
- * @return EXIT_ERROR for error. EXIT_SUCESS for ok.
- */
 int	parse_file(t_gm *game, int argc, char **argv)
 {
 	char	**cub;
@@ -37,9 +21,6 @@ int	parse_file(t_gm *game, int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief Extract the map informations from a fd file
- */
 char	**get_mapfile_info(t_gm *game, char *file_path)
 {
 	char	*line;
@@ -66,9 +47,6 @@ char	**get_mapfile_info(t_gm *game, char *file_path)
 	return (map);
 }
 
-/**
- * @brief Replace tabs for spaces in the matriz
- */
 void	replace_tabs_to_space(char **cub)
 {
 	int	i;

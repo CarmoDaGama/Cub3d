@@ -1,21 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_validations2_bonus.c                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/20 14:58:50 by aconceic          #+#    #+#             */
-/*   Updated: 2024/09/30 14:30:30 by aconceic         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cube_bonus.h"
 
-/**
- * @brief Check if there is an emptyline (only with spaces) on the map
- * @return True indicating that all lines are valid, false and msg otherwise
-*/
 bool	are_all_lines_valid(t_gm *game)
 {
 	int	i;
@@ -30,10 +14,6 @@ bool	are_all_lines_valid(t_gm *game)
 	return (true);
 }
 
-/**
- * @brief Check for map validations horizontally on the map
- * Including the player(NSEW) invalid positions
- */
 bool	is_line_horizontal_valid(char *line)
 {
 	int	i;
@@ -63,9 +43,6 @@ bool	is_line_horizontal_valid(char *line)
 	return (true);
 }
 
-/**
- * @brief Check for map validations vertically on the map
- */
 bool	is_line_vertical_valid(char **map)
 {
 	int	line;
@@ -95,10 +72,6 @@ bool	is_line_vertical_valid(char **map)
 	return (true);
 }
 
-/**
- * @attention Auxiliar to is_line_vertical_valid()
- * Just because of norminette. Used to break the loop.
-*/
 int	is_line_vertical_valid_aux(int *l, int *ch, int *qt_l, int *qt_ch)
 {
 	if ((*l) == (*qt_l) && (*ch) == (*qt_ch))
@@ -112,11 +85,6 @@ int	is_line_vertical_valid_aux(int *l, int *ch, int *qt_l, int *qt_ch)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief Check validacity of first and last line only.
- * Because, according to the subject, the map must be surrounded by wall.
- * If there is a '0' in first or last line, return false.
-*/
 bool	is_first_last_valid(char **map)
 {
 	int	last_line;

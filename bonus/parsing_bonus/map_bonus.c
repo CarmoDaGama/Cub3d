@@ -1,20 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_bonus.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: vivaccar <vivaccar@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 16:40:39 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/07 12:56:05 by vivaccar         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cube_bonus.h"
 
-/**
- * @brief Function that extracts the part of the map from the file
- */
 void	extract_map(t_gm *game, char **scene)
 {
 	int	start;
@@ -26,9 +11,6 @@ void	extract_map(t_gm *game, char **scene)
 	make_map_rectangle(game);
 }
 
-/**
- * @brief Return the first line after
- */
 int	find_starting_point(char **scene)
 {
 	int	i;
@@ -52,9 +34,6 @@ int	find_starting_point(char **scene)
 	return (i);
 }
 
-/**
- * Check if the function has only spaces
- */
 bool	is_empty_line(char *line)
 {
 	int	i;
@@ -69,12 +48,6 @@ bool	is_empty_line(char *line)
 	return (true);
 }
 
-/**
- * @brief Make the map a rectable using the biggest line as reference.
- * This will put spaces after the '\n' or '\0' (in case of last line)
- * until it get the len of biggest line.
- * @details big_line - 1 for for consdering the '\n'.
- */
 void	make_map_rectangle(t_gm *game)
 {
 	int		big_line;
@@ -94,12 +67,6 @@ void	make_map_rectangle(t_gm *game)
 	ft_free_matriz(matriz_dup);
 }
 
-/**
- * @attention Support function to make_map_rectangle();
- * @brief Puts spaces after '\n' or '\n' if necessary to make
- * all the lines in the matriz on the same size
- * @param big_line Size of the biggest line on the matriz 
- */
 char	*create_spaced_line(char *line, int big_line)
 {
 	int		i;

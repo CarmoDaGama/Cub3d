@@ -1,35 +1,9 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: aviscogl <aviscogl@student.42lyon.fr>      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/09 21:54:54 by aconceic          #+#    #+#              #
-#    Updated: 2024/12/22 03:39:32 by aviscogl         ###   ########lyon.fr    #
-#                                                                              #
-# **************************************************************************** #
-
-# linux link
-# https://cdn.intra.42.fr/document/document/25858/minilibx-linux.tgz
-
-# WSL link
-# https://cdn.intra.42.fr/document/document/25859/minilibx_opengl.tgz
-
-# openGL link
-# https://cdn.intra.42.fr/document/document/25859/minilibx_opengl.tgz
-
-##############################################
-#                 MAIN SOURCES               #
-##############################################
-#Libraries
 LIBFT_DIR = libraries/libft/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
 PRINTF_DIR = $(LIBFT_DIR)/ft_printf
 GNL_DIR = $(LIBFT_DIR)get_next_line/
 GNL_LIB = $(GNL_DIR)gnl.a
 
-### Project
 NAME = cub3D
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
@@ -41,19 +15,14 @@ SRC = main.c memory/free.c memory/init.c start/start_game.c parsing/support.c \
 	  events/move.c parsing/map_validations2.c events/rotate.c\
 	  utils/utils.c\
 
-### MiniLibX
-##DIR FOR MLX HAVING IN CONSIDERATION THE OS
 MLX_DIR = libraries/minilibx-linux/
-##FLAGS FOR MLX HAVING IN CONSIDERATION THE OS
 MLXFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
-### Compilation
 CC = cc
 GCC = cc -g
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-### BONUS
 BONUS_NAME = cub3D_bonus
 BONUS_OBJ_DIR = ./objs_bonus/
 BONUS_OBJ = $(addprefix $(BONUS_OBJ_DIR), $(BONUS_SRC:.c=.o))
@@ -66,7 +35,6 @@ BONUS_SRC = main_bonus.c memory_bonus/free_bonus.c memory_bonus/init_bonus.c sta
 	  utils_bonus/utils_bonus.c bonus/gun_bonus.c
 
 
-### RULES
 all : mlx_compile $(NAME)
 
 mlx_compile : 
@@ -104,7 +72,6 @@ fclean:
 	@$(RM) -rf $(OBJ_DIR) > /dev/null 2>&1
 	@$(RM) -rf $(OBJ_DIR) $(BONUS_OBJ_DIR) > /dev/null 2>&1
 	@$(RM) $(BONUS_NAME) > /dev/null 2>&1
-#	@$(RM) -rf $(MLX_DIR) > /dev/null 2>&1
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
 	@echo "$(GREEN)[✔]$(RESET) $(BLUE)Full cleaning Ok!$(RESET)"
 

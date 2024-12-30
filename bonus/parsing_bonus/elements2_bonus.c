@@ -1,20 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   elements2_bonus.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 17:58:01 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/04 16:32:43 by aconceic         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/cube_bonus.h"
 
-/**
- * @brief Verify if some of the elements of the map struct is null.
- */
 bool	is_element_missing(t_gm *game)
 {
 	if (!game->map->fc_str || !game->map->cc_str || !game->map->ntex
@@ -23,10 +8,6 @@ bool	is_element_missing(t_gm *game)
 	return (false);
 }
 
-/**
- * @brief Check if the RGB colors are valid and extract them to the array
- * on the main struct
- */
 bool	is_rgb_valid(t_gm *game)
 {
 	if (!is_color_format_valid(game->map->fc_str)
@@ -49,9 +30,6 @@ bool	is_rgb_valid(t_gm *game)
 	return (true);
 }
 
-/**
- * @brief Extract numbers from a string and save them into an array
- */
 void	extract_numbers(char *str, int arr[3], int i)
 {
 	int	num;
@@ -79,10 +57,6 @@ void	extract_numbers(char *str, int arr[3], int i)
 	if (in_number && index < 3)
 		arr[index] = num;
 }
-
-/**
- * @brief Check to see if the formar of the color string is nbr, nbr, nbr
- */
 bool	is_color_format_valid(char *str)
 {
 	int	i;
