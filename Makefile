@@ -4,17 +4,6 @@ PRINTF_DIR = $(LIBFT_DIR)/ft_printf
 GNL_DIR = $(LIBFT_DIR)get_next_line/
 GNL_LIB = $(GNL_DIR)gnl.a
 
-NAME = cub3D
-OBJ_DIR = ./objs/
-OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-SRC_DIR = ./sources/
-SRC = main.c memory/free.c memory/init.c start/start_game.c parsing/support.c \
-	  parsing/scene.c parsing/elements.c parsing/elements2.c \
-	  parsing/map.c parsing/map_validations1.c raycaster/raycaster.c\
-	  events/exit.c events/handlers.c raycaster/render_textures.c\
-	  events/move.c parsing/map_validations2.c events/rotate.c\
-	  utils/utils.c\
-
 MLX_DIR = libraries/minilibx-linux/
 MLXFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
@@ -35,21 +24,11 @@ BONUS_SRC = main_bonus.c memory_bonus/free_bonus.c memory_bonus/init_bonus.c sta
 	  utils_bonus/utils_bonus.c bonus/gun_bonus.c
 
 
-all : mlx_compile $(NAME)
+all : mlx_compile $(BONUS_NAME)
 
 mlx_compile : 
 	@echo "$(ORANGE)[!]$(RESET) Working on MiniLibX ..."
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
-
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@echo "$(ORANGE)[!]$(RESET) Creating object file: $@ from source: $< ..."
-	@mkdir -p $(dir $@) > /dev/null 2>&1
-	@$(GCC) $(CFLAGS) -c $< -o $@
-
-$(NAME) : $(OBJ) $(LIBFT_LIB)
-	@echo "$(ORANGE)[!]$(RESET) Working on project ... "
-	@$(GCC) $(CFLAGS) $(OBJ) $(LIBFT_LIB) $(GNL_LIB) $(MLXFLAGS) -o $(NAME) > /dev/null 2>&1
-	@echo "$(GREEN)[✔]$(RESET) $(BLUE)Ok!$(RESET) "
 
 $(LIBFT_LIB) : $(LIBFT_DIR) $(PRINTF_DIR) $(GNL_DIR)
 	@echo "$(ORANGE)[!]$(RESET) Working on LIBFT_LIB ..."
@@ -68,8 +47,6 @@ clean:
 
 fclean:
 	@echo "$(ORANGE)[!]$(RESET) Executing full cleaning..."
-	@$(RM) $(NAME) > /dev/null 2>&1
-	@$(RM) -rf $(OBJ_DIR) > /dev/null 2>&1
 	@$(RM) -rf $(OBJ_DIR) $(BONUS_OBJ_DIR) > /dev/null 2>&1
 	@$(RM) $(BONUS_NAME) > /dev/null 2>&1
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
