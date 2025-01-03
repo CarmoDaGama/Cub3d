@@ -11,7 +11,7 @@
 # include <stdbool.h>
 # include <limits.h>
 
-# include "../libraries/libft/libft.h"
+# include "../libraries/libft-main/include/libft.h"
 # include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/minilibx-linux/mlx_int.h"
 

@@ -1,8 +1,8 @@
-LIBFT_DIR = libraries/libft/
+LIBFT_DIR = libraries/libft-main/
 LIBFT_LIB = $(LIBFT_DIR)libft.a
-PRINTF_DIR = $(LIBFT_DIR)/ft_printf
-GNL_DIR = $(LIBFT_DIR)get_next_line/
-GNL_LIB = $(GNL_DIR)gnl.a
+#PRINTF_DIR = $(LIBFT_DIR)/ft_printf
+#GNL_DIR = $(LIBFT_DIR)get_next_line/
+#GNL_LIB = $(GNL_DIR)gnl.a
 
 MLX_DIR = libraries/minilibx-linux/
 MLXFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
@@ -30,10 +30,10 @@ mlx_compile :
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "Compiled MiniLibX!"
 
-$(LIBFT_LIB) : $(LIBFT_DIR) $(PRINTF_DIR) $(GNL_DIR)
-	@make -C $(LIBFT_DIR) bonus > /dev/null 2>&1
-	@make -C $(PRINTF_DIR) > /dev/null 2>&1
-	@make -C $(GNL_DIR) > /dev/null 2>&1
+$(LIBFT_LIB) : $(LIBFT_DIR) #$(PRINTF_DIR) $(GNL_DIR)
+	@make -C $(LIBFT_DIR) bonus #> /dev/null 2>&1
+	#@make -C $(PRINTF_DIR) > /dev/null 2>&1
+	#@make -C $(GNL_DIR) > /dev/null 2>&1
 	@echo "Compiled LIBFT!"
 
 clean:
@@ -60,7 +60,7 @@ $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c
 	@$(GCC) $(CFLAGS) -c $< -o $@
 
 $(BONUS_NAME) : $(BONUS_OBJ) $(LIBFT_LIB)
-	@$(GCC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT_LIB) $(GNL_LIB) $(MLXFLAGS) -o $(BONUS_NAME)
+	@$(GCC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT_LIB) $(MLXFLAGS) -o $(BONUS_NAME)
 	@echo "Compiled Bonus project!"
 
 bonus : mlx_compile $(BONUS_NAME)
