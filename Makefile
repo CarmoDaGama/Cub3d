@@ -27,46 +27,41 @@ BONUS_SRC = main_bonus.c memory_bonus/free_bonus.c memory_bonus/init_bonus.c sta
 all : mlx_compile $(BONUS_NAME)
 
 mlx_compile : 
-	@echo "$(ORANGE)[!]$(RESET) Working on MiniLibX ..."
 	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
+	@echo "Compiled MiniLibX!"
 
 $(LIBFT_LIB) : $(LIBFT_DIR) $(PRINTF_DIR) $(GNL_DIR)
-	@echo "$(ORANGE)[!]$(RESET) Working on LIBFT_LIB ..."
 	@make -C $(LIBFT_DIR) bonus > /dev/null 2>&1
 	@make -C $(PRINTF_DIR) > /dev/null 2>&1
 	@make -C $(GNL_DIR) > /dev/null 2>&1
-	@echo "$(GREEN)[✔]$(RESET) $(BLUE)LIBFT Ok!$(RESET)"
+	@echo "Compiled LIBFT!"
 
 clean:
-	@echo "$(ORANGE)[!]$(RESET) Executing cleaning ..."
 	@$(RM) -rf $(OBJ_DIR) > /dev/null 2>&1
 	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null 2>&1
 	@$(MAKE) clean -C $(MLX_DIR) > /dev/null 2>&1
 	@$(RM) -rf $(OBJ_DIR) $(BONUS_OBJ_DIR) > /dev/null 2>&1
-	@echo "$(GREEN)[✔]$(RESET) $(BLUE)Cleaning Ok!$(RESET)"
+	@echo "Objects Cleaned!"
 
 fclean:
-	@echo "$(ORANGE)[!]$(RESET) Executing full cleaning..."
 	@$(RM) -rf $(OBJ_DIR) $(BONUS_OBJ_DIR) > /dev/null 2>&1
 	@$(RM) $(BONUS_NAME) > /dev/null 2>&1
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
-	@echo "$(GREEN)[✔]$(RESET) $(BLUE)Full cleaning Ok!$(RESET)"
+	@echo "Objects Full cleaned!"
 
 re : fclean all
-	@echo "$(GREEN)[✔]$(RESET) $(MAGENTA)Refresh Ok!$(RESET) "
+	@echo "Project Re-compiled!"
 
 
 bonus : mlx_compile $(BONUS_NAME)
 
 $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c
 	@mkdir -p $(dir $@) > /dev/null 2>&1
-	@echo "$(ORANGE)[!]$(RESET) Creating object file: $@ from source: $< ..."
 	@$(GCC) $(CFLAGS) -c $< -o $@
 
 $(BONUS_NAME) : $(BONUS_OBJ) $(LIBFT_LIB)
-	@echo "$(ORANGE)[!]$(RESET) Working on bonus project ... "
 	@$(GCC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT_LIB) $(GNL_LIB) $(MLXFLAGS) -o $(BONUS_NAME)
-	@echo "$(GREEN)[✔]$(RESET) $(BLUE)Bonus Ok!$(RESET)"
+	@echo "Compiled Bonus project!"
 
 bonus : mlx_compile $(BONUS_NAME)
 
