@@ -1,68 +1,123 @@
-LIBFT_DIR = libraries/libft-main/
-LIBFT_LIB = $(LIBFT_DIR)libft.a
-#PRINTF_DIR = $(LIBFT_DIR)/ft_printf
-#GNL_DIR = $(LIBFT_DIR)get_next_line/
-#GNL_LIB = $(GNL_DIR)gnl.a
+NAMEBONUS	=	cub3D_bonus
+NAME		=	cub3D
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -g
+MLX			=	mlx/Makefile.gen
+LFT			=	libft/libft.a
+BONUSLFT	=	bonus/libraries/libft/libft.a
+INC			=	-I ./src -I ./libft -I ./mlx
+INCBONUS		=	-I ./bonus/src -I ./bonus/libraries/libft -I ./mlx
+LIB			=	-L ./libft -lft -L ./mlx -lmlx -lX11 -lXext -lXrandr -lXrender -lm -lXfixes -lbsd
+LIBONUS		=	-L ./bonus/libraries/libft -lft -L ./mlx -lmlx -lX11 -lXext -lXrandr -lXrender -lm -lXfixes -lbsd
+OBJ			=	$(SRC:.c=.o)
+OBJBONUS	=	$(SRCBONUS:.c=.o)
+GREEN		=	\033[0;32m
+RED 		=	\033[0;31m
+YELLOW		=	\033[0;33m
+RESET		=	\033[0m
+SRC			=	src/cub3d.c \
+				src/events.c \
+				src/update.c \
+				src/root_init.c \
+				src/debug.c \
+				src/move/move.c \
+				src/move/ca_player_move.c \
+				src/dispaly_debug.c \
+				src/raycaster/draw.c \
+				src/raycaster/raycasting.c \
+				src/raycaster/calculate_and_draw_line.c \
+				src/raycaster/set_texture_index.c \
+				src/frees/free.c \
+				src/frees/close_cub.c \
+				src/init/game_init.c \
+				src/init/run_root.c \
+				src/init/get_texture.c \
+				src/init/init_structur.c \
+				src/parsing/parsing_color.c \
+				src/parsing/parse.c \
+				src/parsing/parsing_textures.c \
+				src/parsing/parsing_map.c \
+				src/parsing/get_mapfile_info.c \
+				src/parsing/is_openble_file.c \
+				src/parsing/parse_rgb.c \
+				src/parsing/map_processing.c \
+				src/maps/map.c \
+				src/maps/map1.c \
+				src/utils/util.c \
+				
+SRCBONUS	=	bonus/src/elements2_bonus.c \
+				bonus/src/elements_bonus.c \
+				bonus/src/exit_bonus.c \
+				bonus/src/free_bonus.c \
+				bonus/src/firearm_bonus.c \
+				bonus/src/handlers_bonus.c \
+				bonus/src/init_bonus.c \
+				bonus/src/main_bonus.c \
+				bonus/src/map_bonus.c \
+				bonus/src/map_validations1_bonus.c \
+				bonus/src/map_validations2_bonus.c \
+				bonus/src/mini_map_bonus.c \
+				bonus/src/move_bonus.c \
+				bonus/src/raycaster_bonus.c \
+				bonus/src/render_textures_bonus.c \
+				bonus/src/rotate_bonus.c \
+				bonus/src/scene_bonus.c \
+				bonus/src/start_game_bonus.c \
+				bonus/src/support_bonus.c \
+				bonus/src/utils_bonus.c 
 
-MLX_DIR = libraries/minilibx-linux/
-MLXFLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+all:		$(MLX) $(LFT) $(NAME)
 
-CC = cc
-GCC = cc -g
-CFLAGS = -Wall -Wextra -Werror
-RM = rm -rf
+$(NAME):	$(OBJ)
+			@echo "$(RED)[ .. ] Compiling Mandatory..$(RESET)"
+			@$(CC) $(CFLAGS) -o $@ $^ $(LIB)
+			@echo "$(GREEN)[ OK ]$(RESET) $(YELLOW)Mandatory Ready!$(RESET)"
 
-BONUS_NAME = cub3D_bonus
-BONUS_OBJ_DIR = ./objs_bonus/
-BONUS_OBJ = $(addprefix $(BONUS_OBJ_DIR), $(BONUS_SRC:.c=.o))
-BONUS_SRC_DIR = ./bonus/
-BONUS_SRC = main_bonus.c memory_bonus/free_bonus.c memory_bonus/init_bonus.c start_bonus/start_game_bonus.c parsing_bonus/support_bonus.c \
-	  parsing_bonus/scene_bonus.c parsing_bonus/elements_bonus.c parsing_bonus/elements2_bonus.c \
-	  parsing_bonus/map_bonus.c parsing_bonus/map_validations1_bonus.c raycaster_bonus/raycaster_bonus.c\
-	  events_bonus/exit_bonus.c events_bonus/handlers_bonus.c raycaster_bonus/render_textures_bonus.c\
-	  events_bonus/move_bonus.c parsing_bonus/map_validations2_bonus.c bonus/mini_map_bonus.c events_bonus/rotate_bonus.c\
-	  utils_bonus/utils_bonus.c bonus/gun_bonus.c
+$(NAMEBONUS):	$(OBJBONUS)
+			@echo "$(RED)[ .. ] Compiling Bonus..$(RESET)"
+			@$(CC) $(CFLAGS) -o $@ $^ $(LIBONUS)
+			@echo "$(GREEN)[ OK ]$(RESET) $(YELLOW)Bonus Ready!$(RESET)"
+
+$(MLX):
+			@echo "$(RED)[ .. ] | Compiling minilibx..$(RESET)"
+			@make -s -C mlx
+			@echo "$(GREEN)[ OK ]$(RESET)|$(YELLOW)Minilibx ready!$(RESET)"
 
 
-all : mlx_compile $(BONUS_NAME)
+$(LFT):
+			@echo "$(RED)[ .. ] Compiling Libft..$(RESET)"
+			@make -s -C libft
+			@echo "$(GREEN)[ OK ]$(RESET) $(YELLOW)Libft ready!$(RESET)"
 
-mlx_compile : 
-	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
-	@echo "Compiled MiniLibX!"
+$(BONUSLFT):
+			@echo "$(RED)[ .. ] Compiling Bonus Libft..$(RESET)"
+			@make -s -C bonus/libraries/libft
+			@echo "$(GREEN)[ OK ]$(RESET) $(YELLOW)Bonus Libft ready!$(RESET)"
 
-$(LIBFT_LIB) : $(LIBFT_DIR) #$(PRINTF_DIR) $(GNL_DIR)
-	@make -C $(LIBFT_DIR) bonus #> /dev/null 2>&1
-	#@make -C $(PRINTF_DIR) > /dev/null 2>&1
-	#@make -C $(GNL_DIR) > /dev/null 2>&1
-	@echo "Compiled LIBFT!"
+$(OBJ): src/%.o: src/%.c $(LFT)
+			@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+
+$(OBJBONUS): bonus/src/%.o: bonus/src/%.c $(BONUSLFT)
+			@$(CC) $(CFLAGS) $(INCBONUS) -o $@ -c $<
+
+bonus:		$(MLX) $(BONUSLFT) $(NAMEBONUS)			
+
 
 clean:
-	@$(RM) -rf $(OBJ_DIR) > /dev/null 2>&1
-	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null 2>&1
-	@$(MAKE) clean -C $(MLX_DIR) > /dev/null 2>&1
-	@$(RM) -rf $(OBJ_DIR) $(BONUS_OBJ_DIR) > /dev/null 2>&1
-	@echo "Objects Cleaned!"
+			@make -s $@ -C libft
+			@make -s $@ -C bonus/libraries/libft
+			@rm -rf $(OBJ) src/*.o
+			@rm -rf $(OBJBONUS) bonus/src/*.o
+			@echo "Object files removed."
 
-fclean:
-	@$(RM) -rf $(OBJ_DIR) $(BONUS_OBJ_DIR) > /dev/null 2>&1
-	@$(RM) $(BONUS_NAME) > /dev/null 2>&1
-	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
-	@echo "Objects Full cleaned!"
+fclean:		clean
+			@make -s $@ -C libft
+			@make -s $@ -C bonus/libraries/libft
+			@rm -rf $(NAME)
+			@rm -rf $(NAMEBONUS)
+			@echo "Binary file removed."
 
-re : fclean all
-	@echo "Project Re-compiled!"
+re:			fclean all
 
-
-bonus : mlx_compile $(BONUS_NAME)
-
-$(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c
-	@mkdir -p $(dir $@) > /dev/null 2>&1
-	@$(GCC) $(CFLAGS) -c $< -o $@
-
-$(BONUS_NAME) : $(BONUS_OBJ) $(LIBFT_LIB)
-	@$(GCC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT_LIB) $(MLXFLAGS) -o $(BONUS_NAME)
-	@echo "Compiled Bonus project!"
-
-bonus : mlx_compile $(BONUS_NAME)
-
-.SILENT : all
+rebonus:	fclean bonus
+.PHONY:		all clean fclean re

@@ -1,0 +1,24 @@
+{
+   ignore_readline_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_init
+   ...
+}
+{
+   ignore_readline_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_loop
+   ...
+}
+{
+   ignore_readline_leaks
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_xpm_file_to_image
+   ...
+}
