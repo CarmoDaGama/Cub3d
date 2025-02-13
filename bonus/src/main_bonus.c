@@ -12,7 +12,7 @@
 
 #include "../includes/cube_bonus.h"
 
-void	run_cub(t_game *game)
+void	start_game(t_game *game)
 {
 	start_player_position(game);
 	mlx_mouse_hook(game->mlx->wnd, mouse_fire, game);
@@ -33,9 +33,9 @@ int	main(int argc, char **argv)
 		return (free_game(&game, 1), EXIT_FAILURE);
 	if (parse_file(&game, argc, argv))
 		return (free_game(&game, 1), EXIT_FAILURE);
-	if (run_mlx(&game))
+	if (start_mlx(&game))
 		return (ft_err_msg("Error Mlx Init", EXIT_FAILURE));
-	run_cub(&game);
+	start_game(&game);
 	return (0);
 }
 

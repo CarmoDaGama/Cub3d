@@ -164,7 +164,7 @@ void	free_game(t_game *game, int to_free);
 void	free_map(t_map *map);
 void	free_mlx(t_mlx *mlx, t_game *game);
 
-int		run_mlx(t_game *game);
+int		start_mlx(t_game *game);
 int		init_game_struct(t_game *game);
 void	get_texture_pointers(t_game *game);
 int		init_game_error_handling(t_game *game);

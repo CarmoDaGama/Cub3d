@@ -45,8 +45,8 @@ SRC			=	src/cub3d.c \
 				src/maps/map1.c \
 				src/utils/util.c \
 				
-SRCBONUS	=	bonus/src/elements2_bonus.c \
-				bonus/src/elements_bonus.c \
+SRCBONUS	=	bonus/src/valids_bonus.c \
+				bonus/src/gets_bonus.c \
 				bonus/src/exit_bonus.c \
 				bonus/src/free_bonus.c \
 				bonus/src/firearm_bonus.c \

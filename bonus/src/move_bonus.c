@@ -6,7 +6,7 @@
 /*   By: cgama <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 15:09:09 by cgama             #+#    #+#             */
-/*   Updated: 2025/01/10 15:09:16 by cgama            ###   ########.fr       */
+/*   Updated: 2025/01/13 14:54:21 by cgama            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	move_up(t_game *game)
 
 void	move_down(t_game *game)
 {
-	double	new_x;
-	double	new_y;
+	double		new_x;
+	double		new_y;
+	static int	move_delay = 0;
 
 	new_x = game->ray->plyr_x - (game->ray->dir_x * game->ray->mov_speed);
 	new_y = game->ray->plyr_y - (game->ray->dir_y * game->ray->mov_speed);
@@ -58,6 +59,15 @@ void	move_down(t_game *game)
 	{
 		game->ray->plyr_x = new_x;
 		game->ray->plyr_y = new_y;
+		if (move_delay == 10)
+		{
+			if (!game->firearm->move)
+				game->firearm->move = 20;
+			else
+				game->firearm->move = 0;
+			move_delay = 0;
+		}
+		move_delay++;
 	}
 }
 

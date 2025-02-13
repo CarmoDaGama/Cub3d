@@ -12,7 +12,7 @@
 
 #include "../includes/cube_bonus.h"
 
-int	run_mlx(t_game *game)
+int	start_mlx(t_game *game)
 {
 	game->mlx->cnt = mlx_init();
 	if (!game->mlx->cnt)
